@@ -10,7 +10,7 @@ public class PoSServiceImpl implements PoSService {
         }
 
         if (productNumber.equals("non-existing-barcode")) {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(productNumber);
         }
 
         return "1234";

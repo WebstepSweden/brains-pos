@@ -1,7 +1,6 @@
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class PoSServiceTest {
 
@@ -13,21 +12,22 @@ public class PoSServiceTest {
         // Given
         String expectedPrice = "1234";
         String existingProductNumber = "existing-barcode";
-      //  when(posService.purchaseProduct(existingProductNumber)).thenReturn(expectedPrice);
+
         // When
         String price = posService.purchaseProduct(existingProductNumber);
         // Then
         assertThat(price).isEqualTo(expectedPrice);
     }
 
-    @Test(expected = ProductNotFoundException.class)
-    public void shouldReturnNotFoundForNonExistingBarcode() throws Throwable {
+    @Test
+    public void shouldReturnNotFoundForNonExistingBarcode() {
         // Given
-        //when(posService.purchaseProduct("non-existing-barcode")).thenThrow(ProductNotFoundException.class);
-
         // When
-        posService.purchaseProduct("non-existing-barcode");
-        fail("did not throw the exception");
+        Throwable expectedException = catchThrowable(() -> posService.purchaseProduct("non-existing-barcode"));
+        assertThat(expectedException)
+            .isInstanceOf(ProductNotFoundException.class)
+            .hasMessage(String.format("Product not found for %s!", "non-existing-barcode"));
+        ;
     }
 
     @Test(expected = BadProductNumberException.class)
