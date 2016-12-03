@@ -1,10 +1,9 @@
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
+import org.junit.Test;
 
-public class PoSTest {
+public class PoSServiceTest {
 
     private final PoSService posService = new PoSServiceImpl();
 
