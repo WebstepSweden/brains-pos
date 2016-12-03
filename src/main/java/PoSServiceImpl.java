@@ -1,10 +1,16 @@
-/**
- * Created by reynir on 3.12.2016.
- */
+import java.util.Arrays;
+import java.util.Map;
+
 public class PoSServiceImpl implements PoSService {
 
+    private final Map<String, Product> products;
+
+    public PoSServiceImpl(Map<String, Product> products) {
+        this.products = products;
+    }
+
     @Override
-    public String purchaseProduct(String productNumber) throws BadProductNumberException, ProductNotFoundException {
+    public Integer purchaseProduct(String productNumber) throws BadProductNumberException, ProductNotFoundException {
         if (productNumber == null || productNumber.length() == 0) {
             throw new BadProductNumberException();
         }
@@ -13,6 +19,15 @@ public class PoSServiceImpl implements PoSService {
             throw new ProductNotFoundException(productNumber);
         }
 
-        return "1234";
+        return products.get(productNumber).getPrice();
+    }
+
+    @Override
+    public Integer purchaseProducts(String... productIds) {
+        return products.entrySet().stream()
+                .filter(s -> Arrays.asList(productIds).contains(s.getKey()))
+                .map(Map.Entry::getValue)
+                .mapToInt(Product::getPrice)
+                .sum();
     }
 }

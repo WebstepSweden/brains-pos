@@ -1,3 +1,5 @@
 public interface PoSService {
-    String purchaseProduct(String productNumber) throws Throwable;
+    Integer purchaseProduct(String productNumber) throws Throwable;
+
+    Integer purchaseProducts(String... productIds);
 }
