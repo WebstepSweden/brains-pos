@@ -1,2 +1,2 @@
-public class BadProductNumberException extends Throwable {
+public class BadProductNumberException extends Exception {
 }

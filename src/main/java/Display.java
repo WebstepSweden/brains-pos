@@ -1,4 +1,5 @@
 public class Display {
-    public void displayPrice(String productNumber) {
+    public void displayPrice(Integer price) {
+        System.out.println(price);
     }
 }

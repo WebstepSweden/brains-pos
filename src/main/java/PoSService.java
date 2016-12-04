@@ -1,5 +1,9 @@
-public interface PoSService {
-    Integer purchaseProduct(String productNumber) throws Throwable;
+import java.util.List;
+import java.util.Optional;
 
-    Integer purchaseProducts(String... productIds);
+public interface PoSService {
+    Integer purchaseProducts(String... productIds) throws BadProductNumberException, ProductNotFoundException;
+    Integer purchaseProducts(List<Product> productsToPurchase) throws BadProductNumberException, ProductNotFoundException;
+
+    Optional<Product> findProduct(String barcode);
 }
