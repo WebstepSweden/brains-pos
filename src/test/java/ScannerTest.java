@@ -40,6 +40,7 @@ public class ScannerTest {
         // Then
         Mockito.verify(display, times(1)).displayPrice(1234);
         Mockito.verify(display, times(1)).displayPrice(1235);
+        Mockito.verifyNoMoreInteractions(display);
 
     }
 
